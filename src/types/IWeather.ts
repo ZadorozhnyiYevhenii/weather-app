@@ -1,4 +1,4 @@
-export interface ICurrentWeather {
+export interface IWeather {
   temp_c: number;
   temp_f: number;
   wind_mph: number;
