@@ -1,3 +1,5 @@
+import { ICondition } from "./ICondition";
+
 export interface IWeather {
   temp_c: number;
   temp_f: number;
@@ -5,4 +7,5 @@ export interface IWeather {
   wind_kph: number;
   feelslike_c: number;
   feelslike_f: number;
+  condition: ICondition
 }

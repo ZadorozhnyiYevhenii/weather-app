@@ -1,0 +1,12 @@
+.place-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

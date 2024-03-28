@@ -6,6 +6,7 @@
   border-radius: 0.8em;
   padding: 1em 2em;
   box-sizing: border-box;
+  position: relative;
 
   display: flex;
   justify-content: space-between;
@@ -14,8 +15,15 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    align-items: flex-start;
     font-weight: 600;
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    font-weight: 600;
+    align-items: flex-end;
   }
 
   &__with-icon {
@@ -26,5 +34,13 @@
 
   &__icon {
     font-size: 1.2em;
+  }
+
+  &__button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+
+    color: $main-text-color
   }
 }

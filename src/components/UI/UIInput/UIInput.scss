@@ -2,11 +2,16 @@
 
 .ui-input {
   position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &__input {
-    height: 2.5em;
+    height: 3rem;
     width: 90%;
     padding-left: 1.5em;
-    border-radius: 2em;
+    border-radius: 1.3rem;
     border: none;
     outline: none;
     background: $background-color;
@@ -21,9 +26,9 @@
   &__icon {
     background: none;
     border: none;
-    font-size: 1.3em;
+    font-size: 1.3rem;
     position: absolute;
-    right: 0.5em;
-    top: -0.1em;
+    right: 1.5rem;
+    top: 0.7rem;
   }
 }
