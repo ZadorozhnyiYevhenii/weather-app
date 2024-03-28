@@ -1,16 +1,10 @@
-import { useQuery } from "react-query";
-import { getCurrentWeather } from "./api/getCurrentWeather";
-import { ICurrent } from "./types/ICurrent";
 import "./App.scss";
 
 
 function App() {
-  const {data, isLoading} = useQuery<ICurrent>('w', getCurrentWeather)
 
   return (
     <div>
-      {isLoading && <div>Loading..</div>}
-      {data?.location.name}
     </div>
   );
 }
