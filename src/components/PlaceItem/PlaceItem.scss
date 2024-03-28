@@ -4,7 +4,7 @@
   width: 90%;
   background: $main-color;
   border-radius: 0.8em;
-  padding: 1em 2em;
+  padding: 2rem 2rem;
   box-sizing: border-box;
   position: relative;
 
@@ -29,7 +29,7 @@
   &__with-icon {
     display: flex;
     align-items: center;
-    gap: 0.2em;
+    gap: 0.4rem;
   }
 
   &__icon {
@@ -39,8 +39,20 @@
   &__button {
     position: absolute;
     right: 0.5rem;
-    top: 0.5rem;
+    top: 0.6rem;
+    color: $main-text-color;
 
-    color: $main-text-color
+    font-size: 1.3rem;
+  }
+
+  &__condition {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  &__img {
+    width: 2rem;
+    height: 2rem;
   }
 }

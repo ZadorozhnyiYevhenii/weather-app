@@ -5,8 +5,8 @@ import { CiSearch } from "react-icons/ci";
 import { ICurrentWeather } from "../../types/ICurrent";
 import { getCurrentWeather } from "../../api/getCurrentWeather";
 import { PlaceList } from "../../components/PlaceList/PlaceList";
-import "./MainPage.scss";
 import { StorageKeys } from "../../utils/storageKeys";
+import "./MainPage.scss";
 
 export const MainPage = () => {
   const [value, setValue] = useState("");
@@ -23,12 +23,14 @@ export const MainPage = () => {
     if (e.key === "Enter") {
       const newPlace = await getCurrentWeather(value);
       setPlaces([newPlace, ...places]);
+      setValue("");
     }
   };
 
   const onIconClick = async () => {
     const newPlace = await getCurrentWeather(value);
     setPlaces([newPlace, ...places]);
+    setValue("");
   };
 
   const handleDeletePlace = (location: string) => {
