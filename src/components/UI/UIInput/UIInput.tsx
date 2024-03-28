@@ -5,12 +5,14 @@ export const UIInput = ({
   value,
   onChange,
   icon: Icon,
-  placeholder
+  placeholder,
+  iconColor = 'blue'
 }: {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   icon: IconType;
   placeholder?: string;
+  iconColor?: string
 }) => {
   return (
     <label className="ui-input">
@@ -22,7 +24,7 @@ export const UIInput = ({
         placeholder={placeholder}
       />
       <button className="ui-input__icon">
-        <Icon />
+        <Icon color={iconColor} />
       </button>
     </label>
   );

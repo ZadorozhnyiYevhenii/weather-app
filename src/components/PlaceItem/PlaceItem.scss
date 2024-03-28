@@ -1,0 +1,30 @@
+@import "../../styleutils/variables.scss";
+
+.placeitem {
+  width: 90%;
+  background: $main-color;
+  border-radius: 0.8em;
+  padding: 1em 2em;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: space-between;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: flex-start;
+    font-weight: 600;
+  }
+
+  &__with-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+  }
+
+  &__icon {
+    font-size: 1.2em;
+  }
+}
