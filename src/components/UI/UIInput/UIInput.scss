@@ -1,0 +1,29 @@
+@import "../../../styleutils/variables.scss";
+
+.ui-input {
+  position: relative;
+  &__input {
+    height: 2.5em;
+    width: 90%;
+    padding-left: 1.5em;
+    border-radius: 2em;
+    border: none;
+    outline: none;
+    background: $background-color;
+    transition: all 0.1s ease-in;
+    box-sizing: border-box;
+
+    &:focus {
+      border: 2px solid $main-color;
+    }
+  }
+
+  &__icon {
+    background: none;
+    border: none;
+    font-size: 1.3em;
+    position: absolute;
+    right: 0.5em;
+    top: -0.1em;
+  }
+}
