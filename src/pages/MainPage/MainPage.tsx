@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UIInput } from "../../components/UI/UIInput/UIInput";
 import { CiSearch } from "react-icons/ci";
 import { getCurrentWeather } from "../../api/getCurrentWeather";
 import { PlaceList } from "../../components/PlaceList/PlaceList";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setPlaces } from "../../store/slices/placesSlice";
+import { getCurrentPlacesWeather } from "../../api/getCurrentPlacesWeather";
+import { setPlacesName } from "../../store/slices/placesNameSlice";
 import "./MainPage.scss";
 
 export const MainPage = () => {
   const dispatch = useAppDispatch();
-  const { places } = useAppSelector(state => state.places);
+  const { places } = useAppSelector((state) => state.places);
+  const { placesName } = useAppSelector((state) => state.placesName);
   const [value, setValue] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +23,7 @@ export const MainPage = () => {
     if (e.key === "Enter") {
       const newPlace = await getCurrentWeather(value);
       dispatch(setPlaces([newPlace, ...places]));
+      dispatch(setPlacesName([value, ...placesName]));
       setValue("");
     }
   };
@@ -27,8 +31,22 @@ export const MainPage = () => {
   const onIconClick = async () => {
     const newPlace = await getCurrentWeather(value);
     setPlaces([newPlace, ...places]);
+    dispatch(setPlacesName([value, ...placesName]));
     setValue("");
   };
+
+  useEffect(() => {
+    const fetchAllPlaces = async () => {
+      try {
+        const allPlaces = await getCurrentPlacesWeather(placesName);
+        dispatch(setPlaces(allPlaces));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchAllPlaces();
+  }, []);
 
   return (
     <main className="page">

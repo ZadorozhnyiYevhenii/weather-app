@@ -17,14 +17,13 @@ const placesState = createSlice({
       state.places = action.payload;
     },
     removePlace: (state, action: PayloadAction<string>) => {
-      state.places = state.places.filter((place) => place.location.name !== action.payload);
+      state.places = state.places.filter(
+        (place) => place.location.name !== action.payload
+      );
     },
   },
 });
 
-export const {
-  setPlaces,
-  removePlace
-} = placesState.actions;
+export const { setPlaces, removePlace } = placesState.actions;
 
 export const placesReducer = placesState.reducer;
