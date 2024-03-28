@@ -19,7 +19,7 @@
     box-sizing: border-box;
 
     &:focus {
-      border: 2px solid $main-color;
+      border: 2px solid $main-color; 
     }
   }
 
@@ -28,7 +28,7 @@
     border: none;
     font-size: 1.3rem;
     position: absolute;
-    right: 1.5rem;
+    right: 2rem;
     top: 0.7rem;
   }
 }

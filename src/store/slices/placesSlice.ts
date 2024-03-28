@@ -16,8 +16,8 @@ const placesState = createSlice({
     setPlaces: (state, action: PayloadAction<ICurrentWeather[]>) => {
       state.places = action.payload;
     },
-    removePlace: (state, action: PayloadAction<ICurrentWeather>) => {
-      state.places = state.places.filter((place) => place !== action.payload);
+    removePlace: (state, action: PayloadAction<string>) => {
+      state.places = state.places.filter((place) => place.location.name !== action.payload);
     },
   },
 });

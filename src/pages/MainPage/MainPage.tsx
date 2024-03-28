@@ -1,19 +1,16 @@
 import { useState } from "react";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { UIInput } from "../../components/UI/UIInput/UIInput";
 import { CiSearch } from "react-icons/ci";
-import { ICurrentWeather } from "../../types/ICurrent";
 import { getCurrentWeather } from "../../api/getCurrentWeather";
 import { PlaceList } from "../../components/PlaceList/PlaceList";
-import { StorageKeys } from "../../utils/storageKeys";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setPlaces } from "../../store/slices/placesSlice";
 import "./MainPage.scss";
 
 export const MainPage = () => {
+  const dispatch = useAppDispatch();
+  const { places } = useAppSelector(state => state.places);
   const [value, setValue] = useState("");
-  const [places, setPlaces] = useLocalStorage<ICurrentWeather[]>(
-    StorageKeys.PLACES,
-    []
-  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -22,7 +19,7 @@ export const MainPage = () => {
   const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const newPlace = await getCurrentWeather(value);
-      setPlaces([newPlace, ...places]);
+      dispatch(setPlaces([newPlace, ...places]));
       setValue("");
     }
   };
@@ -31,14 +28,6 @@ export const MainPage = () => {
     const newPlace = await getCurrentWeather(value);
     setPlaces([newPlace, ...places]);
     setValue("");
-  };
-
-  const handleDeletePlace = (location: string) => {
-    const updatedPlaces = (places as ICurrentWeather[]).filter(
-      (place) => place.location.name !== location
-    );
-
-    setPlaces(updatedPlaces);
   };
 
   return (
@@ -52,7 +41,7 @@ export const MainPage = () => {
         onIconClick={onIconClick}
       />
 
-      <PlaceList places={places} onDeletePlace={handleDeletePlace} />
+      <PlaceList />
     </main>
   );
 };

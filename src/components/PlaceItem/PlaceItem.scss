@@ -7,9 +7,20 @@
   padding: 2rem 2rem;
   box-sizing: border-box;
   position: relative;
-
+  height: 10rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    &--disabled {
+      display: none;
+    }
+  }
 
   &__container {
     display: flex;
@@ -54,5 +65,18 @@
   &__img {
     width: 2rem;
     height: 2rem;
+  }
+
+  &__buttons {
+    display: none;
+    
+    &--active {
+      display: flex;
+      height: 7rem;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+    }
   }
 }

@@ -1,0 +1,41 @@
+@import "../../../styleutils/variables.scss";
+
+.ui-button {
+  color: $main-text-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid $main-text-color;
+  padding: 0.4rem;
+  border-radius: 1.2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  max-width: 320px;
+
+  transition: all 0.2s ease-in;
+
+  &--white {
+    background: $main-text-color;
+    color: $main-color;
+
+    &:hover {
+      background: $main-color;
+      color: $main-text-color;
+    }
+  }
+
+  &--blue {
+    background: $main-color;
+    color: $main-text-color;
+
+    &:hover {
+      background: $main-text-color;
+      color: $main-color;
+    }
+  }
+
+  &__icon {
+    font-size: 1.3rem;
+  }
+}
