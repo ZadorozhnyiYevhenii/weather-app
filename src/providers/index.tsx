@@ -1,9 +1,12 @@
-import { ReactQueryProvider } from "./ReactQueryProvider"
+import { ReactQueryProvider } from "./ReactQueryProvider";
+import { ReactRouterProvider } from "./ReactRouterProvider";
 
-export const AppProvider = ({children}: {children: React.ReactNode}) => {
+export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <ReactQueryProvider>
-      {children}
+      <ReactRouterProvider>
+        {children}
+      </ReactRouterProvider>
     </ReactQueryProvider>
-  )
-}
+  );
+};
