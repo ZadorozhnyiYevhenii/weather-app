@@ -1,12 +1,15 @@
 import { ReactQueryProvider } from "./ReactQueryProvider";
 import { ReactRouterProvider } from "./ReactRouterProvider";
+import { ReduxProvider } from "./ReduxProvider";
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ReactQueryProvider>
-      <ReactRouterProvider>
-        {children}
-      </ReactRouterProvider>
-    </ReactQueryProvider>
+    <ReduxProvider>
+      <ReactQueryProvider>
+        <ReactRouterProvider>
+          {children}
+        </ReactRouterProvider>
+      </ReactQueryProvider>
+    </ReduxProvider>
   );
 };
