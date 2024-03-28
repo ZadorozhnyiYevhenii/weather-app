@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { getCurrentWeather } from "./api/getCurrentWeather";
 import { ICurrent } from "./types/ICurrent";
-import "./App.css";
+import "./App.scss";
 
 
 function App() {
