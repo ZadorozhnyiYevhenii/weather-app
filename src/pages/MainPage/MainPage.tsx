@@ -20,7 +20,7 @@ export const MainPage = () => {
   };
 
   const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !placesName.includes(value)) {
       const newPlace = await getCurrentWeather(value);
       dispatch(setPlaces([newPlace, ...places]));
       dispatch(setPlacesName([value, ...placesName]));
@@ -29,10 +29,12 @@ export const MainPage = () => {
   };
 
   const onIconClick = async () => {
-    const newPlace = await getCurrentWeather(value);
-    setPlaces([newPlace, ...places]);
-    dispatch(setPlacesName([value, ...placesName]));
-    setValue("");
+    if (!placesName.includes(value)) {
+      const newPlace = await getCurrentWeather(value);
+      setPlaces([newPlace, ...places]);
+      dispatch(setPlacesName([value, ...placesName]));
+      setValue("");
+    }
   };
 
   useEffect(() => {
@@ -46,6 +48,7 @@ export const MainPage = () => {
     };
 
     fetchAllPlaces();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

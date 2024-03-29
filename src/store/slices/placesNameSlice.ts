@@ -17,7 +17,7 @@ const placesNameState = createSlice({
     },
     removePlacesName: (state, action: PayloadAction<string>) => {
       state.placesName = state.placesName.filter(
-        (place) => place !== action.payload
+        (place) => place.trim().toLowerCase() !== action.payload.toLowerCase()
       );
     },
   },

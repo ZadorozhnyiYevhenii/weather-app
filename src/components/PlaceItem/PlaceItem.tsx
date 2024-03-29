@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import cn from "classnames";
 import { FaWind } from "react-icons/fa";
 import { FaTemperatureThreeQuarters } from "react-icons/fa6";
@@ -9,6 +10,7 @@ import { useAppDispatch } from "../../store/hooks";
 import { removePlace } from "../../store/slices/placesSlice";
 import { CiTrash } from "react-icons/ci";
 import { UIButton } from "../UI/UIButton/UIButton";
+import { removePlacesName } from "../../store/slices/placesNameSlice";
 import "./PlaceItem.scss";
 
 export const PlaceItem = ({ weather }: { weather: ICurrentWeather }) => {
@@ -17,6 +19,7 @@ export const PlaceItem = ({ weather }: { weather: ICurrentWeather }) => {
 
   const handleDeletePlace = (location: string) => {
     dispatch(removePlace(location));
+    dispatch(removePlacesName(location));
   };
 
   const handleToggleIcon = () => {
@@ -30,31 +33,33 @@ export const PlaceItem = ({ weather }: { weather: ICurrentWeather }) => {
           "placeitem__content--disabled": isToggled,
         })}
       >
-        <div className="placeitem__container placeitem__container--last">
-          <div className="placeitem__region placeitem__with-icon">
-            <MdOutlinePlace className="placeitem__icon" />
-            {weather.location.name}
+        <Link to={`/${weather.location.name}`} className="placeitem__link">
+          <div className="placeitem__container placeitem__container--last">
+            <div className="placeitem__region placeitem__with-icon">
+              <MdOutlinePlace className="placeitem__icon" />
+              {weather.location.name}
+            </div>
+            <div className="placeitem__temp placeitem__with-icon">
+              <FaTemperatureThreeQuarters className="placeitem__icon" />
+              {weather.current.temp_c} ℃
+            </div>
           </div>
-          <div className="placeitem__temp placeitem__with-icon">
-            <FaTemperatureThreeQuarters className="placeitem__icon" />
-            {weather.current.temp_c} ℃
+          <div className="placeitem__wrap">
+            <div className="placeitem__wind placeitem__with-icon">
+              <FaWind className="placeitem__icon" />
+              {weather.current.wind_kph}
+            </div>
+            <div className="placeitem__condition">
+              <img
+                src={weather.current.condition.icon}
+                loading="lazy"
+                alt="current condition icon"
+                className="placeitem__img"
+              />
+              {weather.current.condition.text}
+            </div>
           </div>
-        </div>
-        <div className="placeitem__wrap">
-          <div className="placeitem__wind placeitem__with-icon">
-            <FaWind className="placeitem__icon" />
-            {weather.current.wind_kph}
-          </div>
-          <div className="placeitem__condition">
-            <img
-              src={weather.current.condition.icon}
-              loading="lazy"
-              alt="current condition icon"
-              className="placeitem__img"
-            />
-            {weather.current.condition.text}
-          </div>
-        </div>
+        </Link>
         <button
           type="button"
           className="placeitem__button"

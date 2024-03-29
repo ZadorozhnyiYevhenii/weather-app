@@ -1,3 +1,4 @@
+
 const baseurl = 'https://api.weatherapi.com/v1'
 
 export const getCurrentWeather = async (place: string) => {

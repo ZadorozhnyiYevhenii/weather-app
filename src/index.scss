@@ -4,7 +4,6 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: $main-text-color;
 }
 
 body {
@@ -25,4 +24,9 @@ button {
   margin: 0;
   padding: 0;
   border: none;
+}
+
+a {
+  text-decoration: none;
+  color: $main-text-color;
 }
