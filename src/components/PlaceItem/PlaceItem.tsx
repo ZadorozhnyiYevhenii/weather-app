@@ -33,7 +33,7 @@ export const PlaceItem = ({ weather }: { weather: ICurrentWeather }) => {
           "placeitem__content--disabled": isToggled,
         })}
       >
-        <Link to={`/${weather.location.name}`} className="placeitem__link">
+        <Link to={`/forecast/daily-table/${weather.location.name}`} className="placeitem__link">
           <div className="placeitem__container placeitem__container--last">
             <div className="placeitem__region placeitem__with-icon">
               <MdOutlinePlace className="placeitem__icon" />

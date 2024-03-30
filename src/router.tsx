@@ -4,11 +4,17 @@ import { PlacePage } from "./pages/PlacePage/PlacePage";
 
 export const router: RouteObject[] = [
   {
-    path: '/',
+    path: "/",
     element: <MainPage />,
   },
   {
-    path: '/:placeName',
-    element: <PlacePage />
-  }
-]
+    path: "/forecast/daily-table/:placeName",
+    element: <PlacePage />,
+  },
+  {
+    path: "/forecast/graph/:placeName",
+  },
+  {
+    path: "/forecast/map/:placeName",
+  },
+];
