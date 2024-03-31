@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { UITabs } from "../UI/UITabs/UITabs"
 import { placeItems } from "../UI/UITabs/common"
-import { useEffect, useState } from "react"
+import './PlaceLayout.scss';
 
 export const PlaceLayout = ({
   children
@@ -18,12 +19,11 @@ export const PlaceLayout = ({
   
     setActiveKay(activeTab ? activeTab.key : '');
   }, [location.pathname]);
-  console.log(activeKey)
 
   return (
-    <>
+    <main className="page-layout">
       <UITabs items={placeItems} activeKey={activeKey} />
       {children}
-    </>
+    </main>
   )
 }

@@ -7,5 +7,7 @@ export interface IWeather {
   wind_kph: number;
   feelslike_c: number;
   feelslike_f: number;
-  condition: ICondition
+  condition: ICondition;
+  precip_mm: number;
+  precip_in: number;
 }

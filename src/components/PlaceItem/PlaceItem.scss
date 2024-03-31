@@ -26,6 +26,7 @@
     flex-direction: column;
     gap: 0.5em;
     font-weight: 600;
+    
   }
 
   &__link {
@@ -33,6 +34,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    color: $main-text-color;
   }
 
   &__wrap {
