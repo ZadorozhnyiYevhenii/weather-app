@@ -4,18 +4,21 @@ import { placesReducer } from "./slices/placesSlice";
 import { placesNameReducer } from "./slices/placesNameSlice";
 import { persistReducer } from "redux-persist";
 import persistStore from "redux-persist/es/persistStore";
+import { settingsReducer } from "./slices/settingsSlice";
 
 const persistConfig = {
   key: 'root',
   storage,
 };
 
-const persistentPlacesName = persistReducer(persistConfig, placesNameReducer)
+const persistentPlacesName = persistReducer(persistConfig, placesNameReducer);
+const persistentSettings = persistReducer(persistConfig, settingsReducer);
 
 export const store = configureStore({
   reducer: {
     places: placesReducer,
-    placesName: persistentPlacesName 
+    placesName: persistentPlacesName,
+    settings: persistentSettings
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
