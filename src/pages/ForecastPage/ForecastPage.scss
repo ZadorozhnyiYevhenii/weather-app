@@ -1,0 +1,18 @@
+.forecast {
+  &__select {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem;
+  }
+
+  &__period-title {
+    font-size: 1.2rem;
+  }
+
+  &__loader {
+    display: flex;
+    height: 80dvh;
+    justify-content: center;
+  }
+}

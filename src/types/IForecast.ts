@@ -5,10 +5,10 @@ import { IWeather } from "./IWeather";
 export interface IForeCast {
   location: ILocation;
   current: IWeather;
-  forecast: IForeCastDayArr;
+  forecast: IForeCastPeriod;
 }
 
-interface IForeCastDayArr {
+export interface IForeCastPeriod {
   forecastday: IForecastDay[];
 }
 
@@ -17,6 +17,8 @@ export interface IHour {
   time: string;
   temp_c: number;
   temp_f: number;
+  wind_mph: number;
+  wind_kph: number;
 }
 
 interface IForecastDay {
@@ -29,5 +31,5 @@ interface IForecastDay {
     avgtemp_c: number;
     condition: ICondition;
   };
-  hour: IHour[]
+  hour: IHour[];
 }

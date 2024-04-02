@@ -3,8 +3,8 @@ import { CiClock2 } from "react-icons/ci";
 import { FaTemperatureThreeQuarters } from "react-icons/fa6";
 import { CiUmbrella } from "react-icons/ci";
 import { LuWind } from "react-icons/lu";
-import "./CurrentConditions.scss";
 import { useAppSelector } from "../../store/hooks";
+import "./CurrentConditions.scss";
 
 export const CurrenConditions = ({
   currentWeather,
@@ -25,6 +25,7 @@ export const CurrenConditions = ({
           <img
             src={currentWeather?.current.condition.icon}
             alt={currentWeather?.current.condition.text}
+            loading="lazy"
           />
           <span className="current-condition__temp">
             {currentWeather?.current.temp_c}°
@@ -52,7 +53,7 @@ export const CurrenConditions = ({
             {speedType === "km" ? (
               <div>{currentWeather?.current.wind_kph} kph</div>
             ) : (
-              <div>{currentWeather?.current.wind_mph}</div>
+              <div>{currentWeather?.current.wind_mph} mph</div>
             )}
           </div>
         </div>

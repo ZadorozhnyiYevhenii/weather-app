@@ -5,7 +5,7 @@ import { SettingsModal } from "./components/SettingsModal/SettingsModal";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Routes>
         {router.map((route, index) => (
           <Route key={index} path={route.path} element={route.element} />

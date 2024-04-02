@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { CurrenConditions } from "../../components/CurrentConditions/CurrentConditions";
 import { PlaceLayout } from "../../components/PlaceLayout/PlaceLayout";
 import { getForecast } from "../../api/getForecast";
@@ -7,41 +7,76 @@ import { IForeCast } from "../../types/IForecast";
 import { ForecastForDay } from "../../components/ForecastForDay/ForecastForDay";
 import { defaultValue, periodOptions } from "./common";
 import { UISelect } from "../../components/UI/UISelect/UISelect";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ForecastForCustomPeriod } from "../../components/ForecastForCustomPeriod/ForecastForCustomPeriod";
+import { UILoader } from "../../components/UI/UIloader/UILoader";
+import "./ForecastPage.scss";
 
 export const ForecastPage = () => {
   const { placeName = "" } = useParams();
   const [periodValue, setPeriodValue] = useState("1");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handlePeriodChange = (value: string) => {
-    console.log(value)
     setPeriodValue(value);
+    setSearchParams({ period: value });
   };
 
-  const { data } = useQuery<IForeCast>(`${placeName}${periodValue}`, () =>
-    getForecast(placeName, periodValue)
+  const currentPeriod = searchParams.get("period");
+
+  const { data, isLoading } = useQuery<IForeCast>(
+    `${placeName}${periodValue}`,
+    () =>
+      getForecast(
+        placeName,
+        currentPeriod || '1',
+        currentPeriod !== "1" ? "&hour=24" : ""
+      )
   );
+
+  useEffect(() => {
+    const params = searchParams.get("period");
+    setPeriodValue(params as string);
+  }, [periodValue, setSearchParams, searchParams]);
 
   return (
     <PlaceLayout>
-      <CurrenConditions currentWeather={data} />
-      <section>
-        <h2>Forecast for {defaultValue} day</h2>
-        <UISelect
-          options={periodOptions}
-          handleChange={handlePeriodChange}
-          defaultValue={defaultValue}
-        />
-      </section>
+      <main className="forecast">
+        {isLoading ? (
+          <div className="forecast__loader">
+            <UILoader />
+          </div>
+        ) : (
+          <>
+            <CurrenConditions currentWeather={data} />
+            <section className="forecast__select">
+              <h2 className="forecast__period-title">Forecast for</h2>
+              <UISelect
+                options={periodOptions}
+                handleChange={handlePeriodChange}
+                defaultValue={searchParams.get("period") || defaultValue}
+              />
+            </section>
 
-      <div>
-        {data?.forecast.forecastday.map((forecastData) => (
-          <ForecastForDay
-            forecast={forecastData.hour}
-            key={forecastData.date}
-          />
-        ))}
-      </div>
+            {periodValue === "1" ? (
+              <ul>
+                <li>
+                  {data?.forecast.forecastday.map((forecastData) => (
+                    <ForecastForDay
+                      forecast={forecastData.hour}
+                      key={forecastData.date}
+                    />
+                  ))}
+                </li>
+              </ul>
+            ) : (
+              <div>
+                <ForecastForCustomPeriod forecasts={data?.forecast} />
+              </div>
+            )}
+          </>
+        )}
+      </main>
     </PlaceLayout>
   );
 };

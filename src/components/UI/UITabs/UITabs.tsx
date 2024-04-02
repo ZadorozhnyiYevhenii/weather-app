@@ -8,6 +8,6 @@ export const UITabs = ({
   activeKey: string | undefined
 }) => {
   return (
-    <Tabs items={items} activeKey={activeKey} />
+    <Tabs items={items} activeKey={activeKey} style={{ margin: '1rem' }} />
   )
 }
