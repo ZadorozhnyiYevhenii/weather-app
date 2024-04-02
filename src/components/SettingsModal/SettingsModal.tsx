@@ -3,7 +3,13 @@ import { Radio, RadioChangeEvent } from "antd";
 import { UIModal } from "../UI/UIModal/UIModal";
 import { CiSettings } from "react-icons/ci";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { ISpeed, Temp, setSpeedType, setTempType } from "../../store/slices/settingsSlice";
+import {
+  ISpeed,
+  Temp,
+  setSpeedType,
+  setTempType,
+} from "../../store/slices/settingsSlice";
+import "./SettingsModal.scss";
 
 export const SettingsModal = () => {
   const { speedType, tempType } = useAppSelector((state) => state.settings);
@@ -16,18 +22,18 @@ export const SettingsModal = () => {
   };
 
   const onTempTypeChange = (e: RadioChangeEvent) => {
-    dispatch(setTempType(e.target.value))
-  }
+    dispatch(setTempType(e.target.value));
+  };
 
   const handleCancelBtn = () => {
     dispatch(setSpeedType(prevSpeedType));
-    dispatch(setTempType(prevTempType))
-  }
+    dispatch(setTempType(prevTempType));
+  };
 
   const onOk = () => {
     setPrevSpeedType(speedType);
-    setPrevTempType(tempType)
-  }
+    setPrevTempType(tempType);
+  };
 
   return (
     <UIModal icon={CiSettings} onCancel={handleCancelBtn} onOk={onOk}>

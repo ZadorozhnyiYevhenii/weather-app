@@ -1,11 +1,10 @@
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
 import { getCurrentWeather } from "../../api/getCurrentWeather";
-import { ICurrentWeather } from "../../types/ICurrent";
-import { CurrenConditions } from "../../components/CurrentConditions/CurrentConditions";
 import { PlaceLayout } from "../../components/PlaceLayout/PlaceLayout";
+import { ICurrentWeather } from "../../types/ICurrent";
+import { useParams } from "react-router-dom";
 
-export const PlacePage = () => {
+export const MapPage = () => {
   const { placeName = "" } = useParams();
   const { data } = useQuery<ICurrentWeather>(`${placeName}`, () =>
     getCurrentWeather(placeName)
@@ -13,7 +12,7 @@ export const PlacePage = () => {
 
   return (
     <PlaceLayout>
-      <CurrenConditions currentWeather={data} />
+      {data?.current.condition.text}
     </PlaceLayout>
-  )
+  );
 };

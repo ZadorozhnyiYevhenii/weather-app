@@ -1,6 +1,8 @@
 import { RouteObject } from "react-router-dom";
 import { MainPage } from "./pages/MainPage/MainPage";
-import { PlacePage } from "./pages/PlacePage/PlacePage";
+import { ForecastPage } from "./pages/ForecastPage/ForecastPage";
+import { GraphPage } from "./pages/GraphPage/GraphPage";
+import { MapPage } from "./pages/MapPage/MapPage";
 
 export const router: RouteObject[] = [
   {
@@ -9,12 +11,14 @@ export const router: RouteObject[] = [
   },
   {
     path: "/forecast/daily-table/:placeName",
-    element: <PlacePage />,
+    element: <ForecastPage />,
   },
   {
     path: "/forecast/graph/:placeName",
+    element: <GraphPage />
   },
   {
     path: "/forecast/map/:placeName",
+    element: <MapPage />
   },
 ];

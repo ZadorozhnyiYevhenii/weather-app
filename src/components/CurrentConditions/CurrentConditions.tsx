@@ -4,12 +4,15 @@ import { FaTemperatureThreeQuarters } from "react-icons/fa6";
 import { CiUmbrella } from "react-icons/ci";
 import { LuWind } from "react-icons/lu";
 import "./CurrentConditions.scss";
+import { useAppSelector } from "../../store/hooks";
 
 export const CurrenConditions = ({
   currentWeather,
 }: {
   currentWeather: ICurrentWeather | undefined;
 }) => {
+  const { speedType, tempType } = useAppSelector((state) => state.settings);
+
   return (
     <section className="current-condition">
       <h1 className="current-condition__title">
@@ -30,14 +33,27 @@ export const CurrenConditions = ({
         <div className="current-condition__content">
           <div className="current-condition__wrap">
             <FaTemperatureThreeQuarters /> Feels like{" "}
-            <span className="current-condition__feels-like">{currentWeather?.current.feelslike_c}°</span>
+            <span className="current-condition__feels-like">
+              {tempType === "c" ? (
+                <div>{currentWeather?.current.feelslike_c}°</div>
+              ) : (
+                <div>{currentWeather?.current.feelslike_f}f</div>
+              )}
+            </span>
           </div>
           <div className="current-condition__wrap">
             <CiUmbrella />
-            <span className="current-condition__precip">{currentWeather?.current.precip_mm} mm</span>
+            <span className="current-condition__precip">
+              {currentWeather?.current.precip_mm} mm
+            </span>
           </div>
           <div className="current-condition__wrap">
-            <LuWind /> {currentWeather?.current.wind_kph} kph
+            <LuWind />{" "}
+            {speedType === "km" ? (
+              <div>{currentWeather?.current.wind_kph} kph</div>
+            ) : (
+              <div>{currentWeather?.current.wind_mph}</div>
+            )}
           </div>
         </div>
       </div>
