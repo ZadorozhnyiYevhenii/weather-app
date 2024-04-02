@@ -1,12 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
-export type ISpeed = 'km' | 'ml' | null;
-
-export type Temp = 'c' | 'f' | null;
+import { ISpeed } from "../../types/ISpeed";
+import { ITemp } from "../../types/ITemp";
 
 interface SettingsState {
-  speedType: ISpeed | null;
-  tempType: Temp | null;
+  speedType: ISpeed;
+  tempType: ITemp;
 }
 
 const initialState: SettingsState = {
@@ -21,7 +19,7 @@ export const settingsState = createSlice({
     setSpeedType: (state, action: PayloadAction<ISpeed>) => {
       state.speedType = action.payload;
     },
-    setTempType: (state, action: PayloadAction<Temp>) => {
+    setTempType: (state, action: PayloadAction<ITemp>) => {
       state.tempType = action.payload;
     },
   },

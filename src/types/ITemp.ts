@@ -1,0 +1,1 @@
+export type ITemp = 'c' | 'f' | null

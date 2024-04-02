@@ -28,18 +28,18 @@ export const CurrenConditions = ({
             loading="lazy"
           />
           <span className="current-condition__temp">
-            {currentWeather?.current.temp_c}°
+            {tempType === "c"
+              ? `${currentWeather?.current.temp_c}°`
+              : `${currentWeather?.current.temp_f}f`}
           </span>
         </div>
         <div className="current-condition__content">
           <div className="current-condition__wrap">
             <FaTemperatureThreeQuarters /> Feels like{" "}
             <span className="current-condition__feels-like">
-              {tempType === "c" ? (
-                <div>{currentWeather?.current.feelslike_c}°</div>
-              ) : (
-                <div>{currentWeather?.current.feelslike_f}f</div>
-              )}
+              {tempType === "c"
+                ? `${currentWeather?.current.feelslike_c}°`
+                : `${currentWeather?.current.feelslike_f}f`}
             </span>
           </div>
           <div className="current-condition__wrap">
@@ -51,9 +51,9 @@ export const CurrenConditions = ({
           <div className="current-condition__wrap">
             <LuWind />{" "}
             {speedType === "km" ? (
-              <div>{currentWeather?.current.wind_kph} kph</div>
+              `${currentWeather?.current.wind_kph} kph`
             ) : (
-              <div>{currentWeather?.current.wind_mph} mph</div>
+              `${currentWeather?.current.wind_mph} mph`
             )}
           </div>
         </div>

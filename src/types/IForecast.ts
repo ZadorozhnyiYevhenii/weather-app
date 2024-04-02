@@ -29,6 +29,8 @@ interface IForecastDay {
     mintemp_f: number;
     maxtemp_f: number;
     avgtemp_c: number;
+    maxwind_kph: number;
+    maxwind_mph: number;
     condition: ICondition;
   };
   hour: IHour[];

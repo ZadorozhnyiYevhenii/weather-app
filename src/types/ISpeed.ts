@@ -1,0 +1,1 @@
+export type ISpeed = 'km' | 'ml' | null;

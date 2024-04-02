@@ -3,7 +3,7 @@ import { BASE_URL } from "./core";
 export const getCurrentWeather = async (place: string) => {
   try {
     const response =
-      await fetch(`${BASE_URL}/current.json?q=${place}&key=071a984778e443cd949204822242703
+      await fetch(`${BASE_URL}/current.json?q=${place}&key=${import.meta.env.API_KEY}
     `);
 
     const data = await response.json();

@@ -1,0 +1,42 @@
+@import "../../styleutils/variables.scss";
+
+.forecast-custom {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: $main-color;
+    color: $main-text-color;
+    border-radius: 1rem;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column ;
+    gap: 0.4rem;
+  }
+
+  &__img {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  &__conditions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__temp {
+    color: lightsalmon;
+  }
+
+  &__temp-break {
+    color: $main-text-color;
+  }
+}

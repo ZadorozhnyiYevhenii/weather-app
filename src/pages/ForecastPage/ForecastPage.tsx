@@ -30,7 +30,7 @@ export const ForecastPage = () => {
       getForecast(
         placeName,
         currentPeriod || '1',
-        currentPeriod !== "1" ? "&hour=24" : ""
+        currentPeriod !== "1" ? "&hour=15" : ""
       )
   );
 

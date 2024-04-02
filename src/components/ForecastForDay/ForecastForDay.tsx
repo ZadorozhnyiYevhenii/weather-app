@@ -4,7 +4,6 @@ import { IHour } from "../../types/IForecast";
 import { getHour } from "../../helpers/getHour";
 import { FaTemperatureThreeQuarters } from "react-icons/fa6";
 import "./ForecastForDay.scss";
-import { findIconsByTime } from "../../helpers/findIconsByTime";
 
 export const ForecastForDay = ({ forecast }: { forecast: IHour[] }) => {
   const [futureHourForecast, setFutureHourForecast] = useState<IHour[]>([]);
