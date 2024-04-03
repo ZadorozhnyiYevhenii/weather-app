@@ -17,22 +17,21 @@ export const ForecastPage = () => {
   const [periodValue, setPeriodValue] = useState("1");
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handlePeriodChange = (value: string) => {
-    setPeriodValue(value);
-    setSearchParams({ period: value });
-  };
-
-  const currentPeriod = searchParams.get("period");
-
   const { data, isLoading } = useQuery<IForeCast>(
     `${placeName}${periodValue}`,
     () =>
       getForecast(
         placeName,
-        currentPeriod || '1',
-        currentPeriod !== "1" ? "&hour=15" : ""
+        periodValue,
+        periodValue !== "1" || periodValue === null ? "&days=15" : ""
       )
   );
+  console.log(periodValue)
+
+  const handlePeriodChange = (value: string) => {
+    setPeriodValue(value);
+    setSearchParams({ period: value });
+  };
 
   useEffect(() => {
     const params = searchParams.get("period");
@@ -58,7 +57,7 @@ export const ForecastPage = () => {
               />
             </section>
 
-            {periodValue === "1" ? (
+            {periodValue === "1" || periodValue === null ? (
               <ul>
                 <li>
                   {data?.forecast.forecastday.map((forecastData) => (
