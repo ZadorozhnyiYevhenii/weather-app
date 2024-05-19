@@ -12,6 +12,14 @@
   justify-content: center;
   color: $main-text-color;
 
+  &--adding {
+    animation: slideIn 0.3s forwards;
+  }
+
+  &--removing {
+    animation: fadeOut 0.3s forwards;
+  }
+
   &__content {
     display: flex;
     width: 100%;
@@ -26,7 +34,6 @@
     flex-direction: column;
     gap: 0.5em;
     font-weight: 600;
-    
   }
 
   &__link {
@@ -77,7 +84,7 @@
 
   &__buttons {
     display: none;
-    
+
     &--active {
       display: flex;
       height: 7rem;
@@ -86,5 +93,28 @@
       gap: 0.5rem;
       width: 100%;
     }
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

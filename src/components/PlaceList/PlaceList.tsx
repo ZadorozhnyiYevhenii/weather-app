@@ -3,7 +3,11 @@ import { PlaceItem } from "../PlaceItem/PlaceItem";
 import { UISkeleton } from "../UI/UISkeleton/UISkeleton";
 import "./PlaceList.scss";
 
-export const PlaceList = () => {
+export const PlaceList = ({
+  isAdding
+}: {
+  isAdding: boolean
+}) => {
   const { places } = useAppSelector((state) => state.places);
   return (
     <section className="place-list">
@@ -13,7 +17,7 @@ export const PlaceList = () => {
           <ul className="place-list__list">
             {places.map((place) => (
               <li className="place-list__item" key={place.location.name}>
-                <PlaceItem weather={place} />
+                <PlaceItem weather={place} isAdding={isAdding} />
               </li>
             ))}
           </ul>

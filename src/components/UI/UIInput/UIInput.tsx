@@ -1,5 +1,6 @@
 import { IconType } from "react-icons";
 import "./UIInput.scss";
+import { UILoader } from "../UIloader/UILoader";
 
 export const UIInput = ({
   value,
@@ -10,6 +11,7 @@ export const UIInput = ({
   icon: Icon,
   placeholder,
   iconColor = 'blue',
+  loading
 }: {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -19,6 +21,7 @@ export const UIInput = ({
   icon: IconType;
   placeholder?: string;
   iconColor?: string,
+  loading: boolean
 }) => {
   return (
     <label className="ui-input">
@@ -32,7 +35,11 @@ export const UIInput = ({
         onFocus={onFocus}
       />
       <button className="ui-input__icon" onClick={onIconClick}>
-        <Icon color={iconColor} />
+        {loading ? (
+          <UILoader size={1.5} />
+        ) : (
+          <Icon color={iconColor} />
+        )}
       </button>
     </label>
   );

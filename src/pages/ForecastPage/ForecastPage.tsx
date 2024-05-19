@@ -23,10 +23,9 @@ export const ForecastPage = () => {
       getForecast(
         placeName,
         periodValue,
-        periodValue !== "1" || periodValue === null ? "&days=15" : ""
+        periodValue !== "1" && periodValue !== null ? "&hour=15" : ""
       )
   );
-  console.log(periodValue)
 
   const handlePeriodChange = (value: string) => {
     setPeriodValue(value);
@@ -43,7 +42,7 @@ export const ForecastPage = () => {
       <main className="forecast">
         {isLoading ? (
           <div className="forecast__loader">
-            <UILoader />
+            <UILoader size={3} />
           </div>
         ) : (
           <>

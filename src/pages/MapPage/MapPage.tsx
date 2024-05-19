@@ -10,6 +10,7 @@ export const MapPage = () => {
     getCurrentWeather(placeName)
   );
 
+
   return (
     <PlaceLayout>
       {data?.current.condition.text}

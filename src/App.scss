@@ -1,11 +1,12 @@
-.settings-modal {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-
+.app {
   &__logo {
-    height: 10em;
-    width: 10em;
-    font-size: 30px;
+    font-size: 2rem;
+    margin: 1rem 0 0 1rem;
+  }
+
+  &__settings-modal {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
   }
 }

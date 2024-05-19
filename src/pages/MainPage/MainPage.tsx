@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setPlaces } from "../../store/slices/placesSlice";
 import { getCurrentPlacesWeather } from "../../api/getCurrentPlacesWeather";
 import { setPlacesName } from "../../store/slices/placesNameSlice";
+import { Alert } from "antd";
 import "./MainPage.scss";
 
 export const MainPage = () => {
@@ -14,6 +15,9 @@ export const MainPage = () => {
   const { places } = useAppSelector((state) => state.places);
   const { placesName } = useAppSelector((state) => state.placesName);
   const [value, setValue] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
+  const [errorLoading, setErrorLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -21,19 +25,35 @@ export const MainPage = () => {
 
   const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !placesName.includes(value.trim().toLowerCase())) {
-      const newPlace = await getCurrentWeather(value);
-      dispatch(setPlaces([newPlace, ...places]));
-      dispatch(setPlacesName([value.trim().toLowerCase(), ...placesName]));
-      setValue("");
+      setIsLoading(true);
+      try {
+        const newPlace = await getCurrentWeather(value);
+        setIsAdding(true);
+        dispatch(setPlaces([newPlace, ...places]));
+        dispatch(setPlacesName([value.trim().toLowerCase(), ...placesName]));
+        setValue("");
+      } catch {
+        setErrorLoading(true);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   const onIconClick = async () => {
     if (!placesName.includes(value)) {
-      const newPlace = await getCurrentWeather(value);
-      setPlaces([newPlace, ...places]);
-      dispatch(setPlacesName([value.trim().toLowerCase(), ...placesName]));
-      setValue("");
+      setIsLoading(true);
+      try {
+        const newPlace = await getCurrentWeather(value);
+        setIsAdding(true);
+        setPlaces([newPlace, ...places]);
+        dispatch(setPlacesName([value.trim().toLowerCase(), ...placesName]));
+        setValue("");
+      } catch (error) {
+        setErrorLoading(true);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -43,14 +63,16 @@ export const MainPage = () => {
         const allPlaces = await getCurrentPlacesWeather(placesName);
         dispatch(setPlaces(allPlaces));
       } catch (error) {
+        setErrorLoading(true);
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchAllPlaces();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   return (
     <main className="page">
@@ -61,9 +83,13 @@ export const MainPage = () => {
         onKeyDown={handleKeyPress}
         placeholder="Search for your places"
         onIconClick={onIconClick}
+        loading={isLoading}
       />
-
-      <PlaceList />
+      {errorLoading ? (
+        <Alert message="Error" type="error" />
+      ) : (
+        <PlaceList isAdding={isAdding} />
+      )}
     </main>
   );
 };

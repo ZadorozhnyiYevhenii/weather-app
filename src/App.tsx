@@ -16,7 +16,7 @@ function App() {
         ))}
       </Routes>
 
-      <div className="settings-modal">
+      <div className="app__settings-modal">
         <SettingsModal />
       </div>
     </div>
